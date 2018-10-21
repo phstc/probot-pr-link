@@ -39,7 +39,7 @@ function bodyForOpenPR(number: any, body: string): string {
   .join(`**PR:** #${number}`)
 
   if (body.indexOf(`**PR:** #${number}`) !== -1) {
-    return ''
+    return body
   }
 
   if (body.indexOf('**PR:**') === -1) {
