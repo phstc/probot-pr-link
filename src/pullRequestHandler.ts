@@ -31,22 +31,22 @@ const updateIssue = async (context: any, number: any, pullRequest: any) => {
 
 function bodyForClosedPR(number: any, body: string): string {
   return body
-    .split(`:point_right: #${number}`)
-    .join(`:point_right: <s>#${number}</s>`)
+    .split(`:pushpin: #${number}`)
+    .join(`:pushpin: <s>#${number}</s>`)
 }
 
 function bodyForOpenPR(number: any, body: string): string {
   body = body
-    .split(`:point_right: <s>#${number}</s>`)
-    .join(`:point_right: #${number}`)
+    .split(`:pushpin: <s>#${number}</s>`)
+    .join(`:pushpin: #${number}`)
 
   if (body.indexOf(`#${number}`) !== -1) {
     return body
   }
 
-  if (!body.endsWith('\n\n') && !body.includes(':point_right: #')) {
+  if (!body.endsWith('\n\n') && !body.includes(':pushpin: #')) {
     body += '\n\n'
   }
 
-  return (body += `\n:point_right: #${number}`)
+  return (body += `\n:pushpin: #${number}`)
 }
