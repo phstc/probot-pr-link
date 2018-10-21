@@ -14,7 +14,10 @@ const updateIssue = async (context: any, number: any, pullRequest: any) => {
 
   const issue = (await github.issues.get({ owner, repo, number })).data
 
-  const body = pullRequest.state == 'closed' ? bodyForClosedPR(pullRequest.number, issue.body) : bodyForOpenPR(pullRequest.number, issue.body)
+  const body =
+    pullRequest.state == 'closed'
+      ? bodyForClosedPR(pullRequest.number, issue.body)
+      : bodyForOpenPR(pullRequest.number, issue.body)
 
   const attributes = { body }
 
@@ -26,25 +29,24 @@ const updateIssue = async (context: any, number: any, pullRequest: any) => {
   })
 }
 
-
 function bodyForClosedPR(number: any, body: string): string {
   return body
-  .split(`**PR:** #${number}`)
-  .join(`<strike>**PR:** #${number}</strike>`)
+    .split(`:point_right: #${number}`)
+    .join(`:point_right: <s>#${number}</s>`)
 }
 
 function bodyForOpenPR(number: any, body: string): string {
   body = body
-  .split(`<strike>**PR:** #${number}</strike>`)
-  .join(`**PR:** #${number}`)
+    .split(`:point_right: <s>#${number}</s>`)
+    .join(`:point_right: #${number}`)
 
-  if (body.indexOf(`**PR:** #${number}`) !== -1) {
+  if (body.indexOf(`#${number}`) !== -1) {
     return body
   }
 
-  if (body.indexOf('**PR:**') === -1) {
+  if (!body.endWith('\n\n')) {
     body += '\n\n'
   }
 
-  return body += `\n**PR:** #${number}`
+  return (body += `\n:point_right: #${number}`)
 }
