@@ -1,12 +1,12 @@
 {
-  "name": "probot-pr-reference",
+  "name": "probot-pr-link",
   "version": "1.0.0",
   "description": "Add the PR link back to the referenced issues",
-  "author": "Pablo Cantero <pablohstc@gmail.com> (https://github.com/phstc/probot-pr-reference)",
+  "author": "Pablo Cantero <pablohstc@gmail.com> (https://github.com/phstc/probot-pr-link)",
   "license": "ISC",
-  "repository": "https://github.com/phstc/probot-pr-reference.git",
-  "homepage": "https://github.com/phstc/probot-pr-reference",
-  "bugs": "https://github.com/phstc/probot-pr-reference/issues",
+  "repository": "https://github.com/phstc/probot-pr-link.git",
+  "homepage": "https://github.com/phstc/probot-pr-link",
+  "bugs": "https://github.com/phstc/probot-pr-link/issues",
   "keywords": [
     "probot",
     "github",
@@ -18,7 +18,8 @@
     "start": "probot run ./lib/index.js",
     "lint": "standard **/*.ts --fix",
     "test": "jest && standard **/*.ts",
-    "test:watch": "jest --watch --notify --notifyMode=change --coverage"
+    "test:watch": "jest --watch --notify --notifyMode=change --coverage",
+    "heroku-postbuild": "npm run build"
   },
   "dependencies": {
     "probot": "^7.0.0"
