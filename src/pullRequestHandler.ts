@@ -44,7 +44,7 @@ function bodyForOpenPR(number: any, body: string): string {
     return body
   }
 
-  if (!body.endWith('\n\n')) {
+  if (!body.endsWith('\n\n')) {
     body += '\n\n'
   }
 
