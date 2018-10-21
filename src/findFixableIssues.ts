@@ -8,9 +8,7 @@ export function findFixableIssues(body: string) {
   )
 
   return Array.from(
-    new Set(
-      (matches || []).map(match => getMatchingIssue(match))
-    )
+    new Set((matches || []).map(match => getMatchingIssue(match)))
   )
 }
 
