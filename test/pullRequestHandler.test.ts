@@ -7,6 +7,7 @@ const pullRequest = {
   body: `Closes #${number}`,
   merged: true,
   number: '5678',
+  state: 'opened',
   user: {
     login: 'phstc'
   }
@@ -45,6 +46,38 @@ test('adds references', async () => {
   await updateReferencedIssues(context)
 
   expect(github.issues.get).toBeCalledWith({ owner, repo, number })
-  // TODO: Test body
-  expect(github.issues.edit).toBeCalled()
+
+  const body = `\n\n\n:pushpin: #${pullRequest.number}`
+
+  expect(github.issues.edit).toBeCalledWith({
+    owner,
+    repo,
+    number,
+    body
+  })
+})
+
+test('closes references', async () => {
+  const issue = {
+    number: '1234',
+    state: 'open',
+    body: `\n\n\n:pushpin: #${pullRequest.number}`,
+    labels: []
+  }
+  github.issues.get.mockReturnValue({ data: issue })
+
+  pullRequest.state = 'closed'
+
+  await updateReferencedIssues(context)
+
+  expect(github.issues.get).toBeCalledWith({ owner, repo, number })
+
+  const body = `\n\n\n:pushpin: <s>#${pullRequest.number}</s>`
+
+  expect(github.issues.edit).toBeCalledWith({
+    owner,
+    repo,
+    number,
+    body
+  })
 })

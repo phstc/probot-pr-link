@@ -19,6 +19,11 @@ const updateIssue = async (context: any, number: any, pullRequest: any) => {
       ? bodyForClosedPR(pullRequest.number, issue.body)
       : bodyForOpenPR(pullRequest.number, issue.body)
 
+  if (issue.body === body) {
+    // nothing to update
+    return
+  }
+
   const attributes = { body }
 
   await github.issues.edit({
@@ -30,17 +35,13 @@ const updateIssue = async (context: any, number: any, pullRequest: any) => {
 }
 
 function bodyForClosedPR(number: any, body: string): string {
-  return body
-    .split(`:pushpin: #${number}`)
-    .join(`:pushpin: <s>#${number}</s>`)
+  return body.split(`:pushpin: #${number}`).join(`:pushpin: <s>#${number}</s>`)
 }
 
 function bodyForOpenPR(number: any, body: string): string {
-  body = body
-    .split(`:pushpin: <s>#${number}</s>`)
-    .join(`:pushpin: #${number}`)
+  body = body.split(`:pushpin: <s>#${number}</s>`).join(`:pushpin: #${number}`)
 
-  if (body.indexOf(`#${number}`) !== -1) {
+  if (body.indexOf(`:pushpin: #${number}`) !== -1) {
     return body
   }
 
