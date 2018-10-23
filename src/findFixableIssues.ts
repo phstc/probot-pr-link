@@ -2,7 +2,7 @@
 // Closes #issue-number
 // Closes https://github.com/org/repo/issues/issue-number
 // Closes org/repo/issues/issue-number
-export function findFixableIssues(body: string) {
+export function findFixableIssues (body: string) {
   const matches = body.match(
     /(close|closes|closed|fix|fixes|fixed|resolve|resolves|resolved)\s*(#\d+|https?:\/\/github\.com\/.*\/.*\/issues\/\d+|.*\/.*#\d+)/gi
   )
@@ -12,7 +12,7 @@ export function findFixableIssues(body: string) {
   )
 }
 
-function getMatchingIssue(match: string) {
+function getMatchingIssue (match: string) {
   if (match.indexOf('#') > -1) {
     // #1234
     return match.split('#').pop()

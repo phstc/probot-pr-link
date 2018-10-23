@@ -1,6 +1,6 @@
 import { findFixableIssues } from './findFixableIssues'
 
-export async function updateReferencedIssues(context: any) {
+export async function updateReferencedIssues (context: any) {
   const pullRequest = context.payload.pull_request
   await findFixableIssues(pullRequest.body).forEach(async (number: any) => {
     await updateIssue(context, number, pullRequest)
@@ -15,7 +15,7 @@ const updateIssue = async (context: any, number: any, pullRequest: any) => {
   const issue = (await github.issues.get({ owner, repo, number })).data
 
   const body =
-    pullRequest.state == 'closed'
+    pullRequest.state === 'closed'
       ? bodyForClosedPR(pullRequest.number, issue.body)
       : bodyForOpenPR(pullRequest.number, issue.body)
 
@@ -34,11 +34,11 @@ const updateIssue = async (context: any, number: any, pullRequest: any) => {
   })
 }
 
-function bodyForClosedPR(number: any, body: string): string {
+function bodyForClosedPR (number: any, body: string): string {
   return body.split(`:pushpin: #${number}`).join(`:pushpin: <s>#${number}</s>`)
 }
 
-function bodyForOpenPR(number: any, body: string): string {
+function bodyForOpenPR (number: any, body: string): string {
   body = body.split(`:pushpin: <s>#${number}</s>`).join(`:pushpin: #${number}`)
 
   if (body.indexOf(`:pushpin: #${number}`) !== -1) {
