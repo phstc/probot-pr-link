@@ -8,7 +8,7 @@ Add `Fixes #issue-number` (or [any other closable keyword](https://help.github.c
 
 Then PR link will automatically add :pushpin: #pr-number back to the respective issue(s).
 
-![](https://raw.githubusercontent.com/phstc/probot-pr-link/master/pr-link-1.png)
+![](https://raw.githubusercontent.com/phstc/probot-pr-link/master/pr-link-2.png)
 
 ## Setup
 
