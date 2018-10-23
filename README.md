@@ -1,6 +1,14 @@
 # probot-pr-link
 
-> A GitHub App built with [Probot](https://github.com/probot/probot) that Add the PR link back to the referenced issues
+PR Link adds the PR link back to all closable issues for helping to navigate back-forth in between issues and pull requests.
+
+Add `Fixes #issue-number` (or [any other closable keyword](https://help.github.com/articles/closing-issues-using-keywords/)) to a pull request:
+
+![](https://raw.githubusercontent.com/phstc/probot-pr-link/master/pr-link-1.png)
+
+Then PR link will automatically add :pushpin: #pr-number back to the respective issue(s).
+
+![](https://raw.githubusercontent.com/phstc/probot-pr-link/master/pr-link-1.png)
 
 ## Setup
 
