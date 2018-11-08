@@ -2,7 +2,7 @@ import { findFixableIssues } from './findFixableIssues'
 
 export async function updateReferencedIssues (context: any) {
   const pullRequest = context.payload.pull_request
-  await findFixableIssues(pullRequest.body).forEach(async (number: any) => {
+  await findFixableIssues(pullRequest.body || '').forEach(async (number: any) => {
     await updateIssue(context, number, pullRequest)
   })
 }
@@ -38,7 +38,12 @@ const updateIssue = async (context: any, number: any, pullRequest: any) => {
 }
 
 function bodyForClosedPR (number: any, body: string): string {
-  return body.split(`:pushpin: #${number}`).join(`:pushpin: <s>#${number}</s>`)
+  if (body.indexOf(`:pushpin: #${number}`) > -1) {
+    // there are no references for the pull request yet
+    return body.split(`:pushpin: #${number}`).join(`:pushpin: <s>#${number}</s>`)
+  } else {
+    return bodyForOpenPR(number, body)
+  }
 }
 
 function bodyForOpenPR (number: any, body: string): string {
