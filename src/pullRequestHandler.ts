@@ -14,12 +14,15 @@ const updateIssue = async (context: any, number: any, pullRequest: any) => {
 
   const issue = (await github.issues.get({ owner, repo, number })).data
 
+  // issue.body can be null
+  const originalBody = issue.body || ''
+
   const body =
     pullRequest.state === 'closed'
-      ? bodyForClosedPR(pullRequest.number, issue.body)
-      : bodyForOpenPR(pullRequest.number, issue.body)
+      ? bodyForClosedPR(pullRequest.number, originalBody)
+      : bodyForOpenPR(pullRequest.number, originalBody)
 
-  if (issue.body === body) {
+  if (originalBody === body) {
     // nothing to update
     return
   }
