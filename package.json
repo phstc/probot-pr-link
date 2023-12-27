@@ -2,7 +2,7 @@
   "name": "probot-pr-link",
   "version": "1.0.0",
   "description": "Add the PR link back to the referenced issues",
-  "author": "Pablo Cantero <pablohstc@gmail.com> (https://github.com/phstc/probot-pr-link)",
+  "author": "Pablo Cantero",
   "license": "ISC",
   "repository": "https://github.com/phstc/probot-pr-link.git",
   "homepage": "https://github.com/phstc/probot-pr-link",
